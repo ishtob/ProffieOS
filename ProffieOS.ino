@@ -1823,7 +1823,9 @@ void setup() {
 
   Looper::DoSetup();
   // Time to identify the blade.
+#ifndef  BLADE_DETECT_PIN
   prop.FindBlade();
+#endif
   SaberBase::DoBoot();
 #if defined(ENABLE_SD) && defined(ENABLE_AUDIO)
   if (!sd_card_found) {
