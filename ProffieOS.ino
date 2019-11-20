@@ -33,6 +33,9 @@
 // #define CONFIG_FILE "config/td_proffieboard_config.h"
 // #define CONFIG_FILE "config/teensy_audio_shield_micom.h"
 // #define CONFIG_FILE "config/proffieboard_v2_ob4.h"
+// #define CONFIG_FILE "config/ryan_v1_config.h"
+// #define CONFIG_FILE "config/ishtob_v1_config.h"
+#define CONFIG_FILE "config/ishtob_v2_config.h"
 
 #ifdef CONFIG_FILE_TEST
 #undef CONFIG_FILE
