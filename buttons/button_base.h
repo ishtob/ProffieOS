@@ -33,10 +33,10 @@ protected:
         if (millis() - push_millis_ > 300) {
           prop.Event(button_, EVENT_HELD);
           while (DebouncedRead()) {
-            if (millis() - push_millis_ > 800){
+            if (millis() - push_millis_ > 600){
               prop.Event(button_, EVENT_HELD_MEDIUM);
               while (DebouncedRead()) {
-                if (millis() - push_millis_ > 2000) {
+                if (millis() - push_millis_ > 1000) {
                   prop.Event(button_, EVENT_HELD_LONG);
                   while (DebouncedRead()) YIELD();
                 }
