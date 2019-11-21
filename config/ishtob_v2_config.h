@@ -58,7 +58,7 @@ StylePtr<InOutHelperX<SimpleClash<Lockup<Blast<Rgb16<37247,37798,50393>,Rgb16<56
 StylePtr<InOutHelperX<SimpleClash<Lockup<Blast<Rgb16<37247,37798,50393>,Rgb16<56306,28268,31966>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb16<28268,39681,56306>>,AudioFlicker<Rgb16<37247,37798,50393>,White>>,White>,InOutFuncX<Int<300>,Int<800>>>>(),
 StylePtr<InOutHelperX<SimpleClash<Lockup<Blast<Rgb16<37247,37798,50393>,Rgb16<56306,28268,31966>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb16<28268,39681,56306>>,AudioFlicker<Rgb16<37247,37798,50393>,White>>,White>,InOutFuncX<Int<300>,Int<800>>,Pulsing<White,Rgb<50,50,50>,3000>>>(), "white"},
 { "SmthFuzz", "tracks/mercury.wav",
-StylePtr<InOutSparkTip<LocalizedClash<Lockup<OriginalBlast<InOutHelper<SimpleClash<Lockup<Rainbow,AudioFlicker<Rainbow,White>,AudioFlicker<Rainbow,White>>,White,100>,450,1200,Black>,White>,AudioFlicker<InOutHelper<SimpleClash<Lockup<Rainbow,AudioFlicker<Rainbow,White>,AudioFlicker<Rainbow,White>>,White,100>,450,1200,Black>,White>,AudioFlicker<Blue,White>>,White,100,50>,500,1200,White>>(),
+StylePtr<InOutHelper<Lockup<StyleFire<Blast<LocalizedClash<Gradient<Red,OrangeRed,Orange,GreenYellow,Green,Aqua,DodgerBlue,Blue,Rgb<20,0,255>>,White,200,80>,White,300,200,400>,Red,10,2,FireConfig<100,2000,5>,FireConfig<2000,500,50>,FireConfig<0,5000,10>,FireConfig<100,2000,5>>,Pulsing<StyleFire<Blast<LocalizedClash<Gradient<Red,Orange,Strobe<White,RandomPerLEDFlicker<Blue,White>,50,1>,Green,Aqua,DodgerBlue,Blue,Rgb<20,0,255>>,White,200,80>,White,300,200,400>,Red,10,2,FireConfig<100,2000,5>,FireConfig<2000,500,50>,FireConfig<0,5000,10>,FireConfig<100,2000,5>>,StyleFire<Blast<LocalizedClash<Gradient<Red,Orange,Strobe<White,RandomPerLEDFlicker<Blue,White>,50,1>,Green,DodgerBlue,Blue,Rgb<20,0,255>>,White,200,80>,White,300,200,400>,Red,10,2,FireConfig<100,2000,5>,FireConfig<2000,500,50>,FireConfig<0,5000,10>,FireConfig<100,2000,5>>,3500>>,150,500,Black>>(),
 StylePtr<InOutSparkTip<LocalizedClash<Lockup<OriginalBlast<InOutHelper<SimpleClash<Lockup<Rainbow,AudioFlicker<Rainbow,White>,AudioFlicker<Rainbow,White>>,White,100>,450,1200,Black>,White>,AudioFlicker<InOutHelper<SimpleClash<Lockup<Rainbow,AudioFlicker<Rainbow,White>,AudioFlicker<Rainbow,White>>,White,100>,450,1200,Black>,White>,AudioFlicker<Blue,White>>,White,100,50>,500,1200,White>>(),
 StylePtr<InOutHelper<Rainbow,300,800,Pulsing<Rainbow,Mix<Int<16384>,Rainbow,Black>,3000>>>(), "rainbow"},
 { "TeensySF", "tracks/venus.wav",
@@ -74,8 +74,21 @@ StyleNormalPtr<BLACK, BLACK, 300, 800>(),
 StyleNormalPtr<BLACK, BLACK, 300, 800>(),
 StyleNormalPtr<BLACK, BLACK, 300, 800>(), "Battery\nLevel"}
 };
+
+Preset other_presets[] = {
+{ "Balance", "tracks/March.wav",
+StylePtr<InOutHelperX<SimpleClash<Lockup<Blast<Rgb16<37247,37798,50393>,Rgb16<56306,0,0>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb16<28268,39681,56306>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb<255,120,0>>>,Rgb<100,50,255>>,InOutFuncX<Int<300>,Int<800>>>>(),
+StylePtr<InOutHelperX<SimpleClash<Lockup<Blast<Rgb16<37247,37798,50393>,Rgb16<56306,0,0>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb16<28268,39681,56306>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb<255,120,0>>>,Rgb<100,50,255>>,InOutFuncX<Int<300>,Int<800>>>>(),
+StylePtr<InOutHelperX<SimpleClash<Lockup<Blast<Rgb16<37247,37798,50393>,Rgb16<56306,0,0>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb16<28268,39681,56306>>,AudioFlicker<Rgb16<37247,37798,50393>,Rgb<255,120,0>>>,Rgb<100,50,255>>,InOutFuncX<Int<300>,Int<800>>,Pulsing<White,Rgb<50,50,50>,3000>>>(), "white"},
+};
+
 BladeConfig blades[] = {
  { 0,
+ 	WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, bladePin, PowerPINS<bladePowerPin1,bladePowerPin2,bladePowerPin3> >(), //main blade
+    WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, blade2Pin, PowerPINS<bladePowerPin4> >(), //shotk NPXL
+    WS281XBladePtr<1, blade3Pin, Color8::GRBw, PowerPINS<bladePowerPin6> >(),// crystal chamber
+    CONFIGARRAY(presets) },
+ { 5100,
  	WS281XBladePtr<112, bladePin, Color8::GRBw, PowerPINS<bladePowerPin1,bladePowerPin2,bladePowerPin3> >(), //main blade
     WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, blade2Pin, PowerPINS<bladePowerPin4> >(), //shotk NPXL
     WS281XBladePtr<1, blade3Pin, Color8::GRBw, PowerPINS<bladePowerPin6> >(),// crystal chamber
