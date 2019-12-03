@@ -13,6 +13,46 @@ public:
   SaberIshtobButtons() : PropBase() {}
   const char* name() override { return "SaberIshtobButtons"; }
 
+//Volume change - function adopted from sa22c
+  void ChangeVolume(bool up) {
+    if (up) {
+      STDOUT.println("Volume up");
+      if (dynamic_mixer.get_volume() < MAX_VOLUME) {
+        dynamic_mixer.set_volume(std::min<int>(MAX_VOLUME,
+          dynamic_mixer.get_volume() + 100));
+        beeper.Beep(0.3, 500);
+        STDOUT.print("Current Volume: ");
+        STDOUT.println(dynamic_mixer.get_volume());
+        SaveGlobalState();
+      }
+      else {
+        beeper.Beep(0.1, 500);
+        beeper.Beep(0.1, 0);
+        beeper.Beep(0.1, 500);
+        STDOUT.print("Max Volume Reached: ");
+        STDOUT.println(dynamic_mixer.get_volume());
+      }
+    } else {
+      STDOUT.println("Volume Down");
+      if (dynamic_mixer.get_volume() > MIN_VOLUME) {
+        dynamic_mixer.set_volume(std::max<int>(MIN_VOLUME,
+          dynamic_mixer.get_volume() - 100));
+        beeper.Beep(0.3, 500);
+        STDOUT.print("Current Volume: ");
+        STDOUT.println(dynamic_mixer.get_volume());
+        SaveGlobalState();
+      }
+      else{
+        STDOUT.print("Min Volume Reached: ");
+        STDOUT.println(dynamic_mixer.get_volume());
+        beeper.Beep(0.1, 500);
+        beeper.Beep(0.1, 0);
+        beeper.Beep(0.1, 500);
+      }
+    }
+  }
+
+
   bool Event2(enum BUTTON button, EVENT event, uint32_t modifiers) override {
     switch (EVENTID(button, event, modifiers)) {
       case EVENTID(BUTTON_POWER, EVENT_PRESSED, MODE_ON):
@@ -64,7 +104,34 @@ public:
         next_preset();
 #endif
   return true;
+// Volume Adjustment
+      case EVENTID(BUTTON_AUX, EVENT_CLICK_SHORT, MODE_OFF | BUTTON_AUX2):
+    if (mode_volume_){
+      mode_volume_ = false;
+      beeper.Beep(0.2, 3000);
+      beeper.Beep(0.3, 200);
+      STDOUT.println("Exit Volume Menu");
+    }
+    else{
+      mode_volume_ = true;
+      beeper.Beep(0.2, 3000);
+      beeper.Beep(0.3, 3000);
+      STDOUT.println("Enter Volume Menu");
+    }
+    return true;
+      case EVENTID(BUTTON_AUX, EVENT_CLICK_SHORT, MODE_OFF):
+         if (mode_volume_) {
+          ChangeVolume(true);
+         }
+      return true;
 
+      case EVENTID(BUTTON_AUX2, EVENT_CLICK_SHORT, MODE_OFF):
+         if (mode_volume_) {
+          ChangeVolume(false);
+         }
+      return true;
+
+//Activate Mute Mode
       case EVENTID(BUTTON_POWER, EVENT_DOUBLE_CLICK, MODE_ON):
   if (millis() - activated_ < 500) {
     if (SetMute(true)) {
@@ -141,7 +208,9 @@ public:
 
         // Off functions
       case EVENTID(BUTTON_AUX, EVENT_DOUBLE_CLICK, MODE_OFF):
-        StartOrStopTrack();
+        if (!mode_volume_){
+         StartOrStopTrack();
+        }
   return true;
 
       case EVENTID(BUTTON_POWER, EVENT_PRESSED, MODE_OFF):
@@ -182,6 +251,8 @@ public:
 private:
   bool aux_on_ = true;
   bool pointing_down_ = false;
+  bool mode_volume_ = false;
+
 };
 
 #endif

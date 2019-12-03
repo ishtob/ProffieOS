@@ -3,7 +3,9 @@
 #define NUM_BLADES 3
 #define NUM_BUTTONS 3
 #define BLADE_DETECT_PIN blade4Pin
-#define VOLUME 100
+#define VOLUME 200
+#define MIN_VOLUME 100
+#define MAX_VOLUME 2000
 const unsigned int maxLedsPerStrip = 193;
 #define CLASH_THRESHOLD_G 1.3
 #define ENABLE_AUDIO
