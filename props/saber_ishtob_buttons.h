@@ -72,22 +72,28 @@ public:
       case EVENTID(BUTTON_AUX2, EVENT_LATCH_ON, MODE_OFF):
       case EVENTID(BUTTON_POWER, EVENT_CLICK_SHORT, MODE_OFF):
       case EVENTID(BUTTON_POWER, EVENT_HELD_LONG, MODE_OFF):
+    if (mode_volume_){
+      mode_volume_ = false;
+      beeper.Beep(0.2, 3000);
+      beeper.Beep(0.3, 200);
+      STDOUT.println("Exit Volume Menu");
+    }
+    else{
         aux_on_ = false;
         On();
+    }
   return true;
 //Blade Detection
 
 #ifdef BLADE_DETECT_PIN
-      case EVENTID(BUTTON_BLADE_DETECT, EVENT_LATCH_ON, MODE_ANY_BUTTON | MODE_ON):
-      case EVENTID(BUTTON_BLADE_DETECT, EVENT_LATCH_ON, MODE_ANY_BUTTON | MODE_OFF):
+      case EVENTID(BUTTON_BLADE_DETECT, EVENT_LATCH_ON, MODE_ANY_BUTTON):
   // Might need to do something cleaner, but let's try this for now.
   blade_detected_ = true;
   FindBladeAgain();
   SaberBase::DoBladeDetect(true);
   return true;
   
-      case EVENTID(BUTTON_BLADE_DETECT, EVENT_LATCH_OFF, MODE_ANY_BUTTON | MODE_ON):
-      case EVENTID(BUTTON_BLADE_DETECT, EVENT_LATCH_OFF, MODE_ANY_BUTTON | MODE_OFF):
+      case EVENTID(BUTTON_BLADE_DETECT, EVENT_LATCH_OFF, MODE_ANY_BUTTON):
   // Might need to do something cleaner, but let's try this for now.
   blade_detected_ = false;
   FindBladeAgain();

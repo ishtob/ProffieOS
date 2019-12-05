@@ -78,11 +78,13 @@ StyleNormalPtr<BLACK, BLACK, 300, 800>(), "Battery\nLevel"}
 };
 BladeConfig blades[] = {
  { 0,
+#ifdef BLADE_DETECT_PIN
  	WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, bladePin, PowerPINS<bladePowerPin1,bladePowerPin2,bladePowerPin3> >(), //main blade
     WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, blade2Pin, PowerPINS<bladePowerPin4> >(), //shotk NPXL
     WS281XBladePtr<1, blade3Pin, Color8::GRBw, PowerPINS<bladePowerPin6> >(),// crystal chamber
     CONFIGARRAY(presets) },
  { 28,
+#endif
  	WS281XBladePtr<112, bladePin, Color8::GRBw, PowerPINS<bladePowerPin1,bladePowerPin2,bladePowerPin3> >(), //main blade
     WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, blade2Pin, PowerPINS<bladePowerPin4> >(), //shotk NPXL
     WS281XBladePtr<1, blade3Pin, Color8::GRBw, PowerPINS<bladePowerPin6> >(),// crystal chamber
