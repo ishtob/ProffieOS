@@ -77,7 +77,7 @@ StyleNormalPtr<BLACK, BLACK, 300, 800>(),
 StyleNormalPtr<BLACK, BLACK, 300, 800>(), "Battery\nLevel"}
 };
 BladeConfig blades[] = {
- { 0,
+ { 500,
 #ifdef BLADE_DETECT_PIN
  	WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, bladePin, PowerPINS<bladePowerPin1,bladePowerPin2,bladePowerPin3> >(), //main blade
     WS2811BladePtr<5, WS2811_ACTUALLY_800kHz | WS2811_GRB, blade2Pin, PowerPINS<bladePowerPin4> >(), //shotk NPXL
@@ -93,7 +93,7 @@ BladeConfig blades[] = {
 #endif
 
 #ifdef CONFIG_BUTTONS
-TouchButton PowerButton(BUTTON_POWER, powerButtonPin, 4000, "pow");
+TouchButton PowerButton(BUTTON_POWER, powerButtonPin, 5000, "pow");
 Button AuxButton(BUTTON_AUX, auxPin, "aux");
 Button Aux2Button(BUTTON_AUX2, aux2Pin, "aux2");
 #endif
