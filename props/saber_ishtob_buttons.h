@@ -71,7 +71,6 @@ public:
       case EVENTID(BUTTON_AUX, EVENT_LATCH_ON, MODE_OFF):
       case EVENTID(BUTTON_AUX2, EVENT_LATCH_ON, MODE_OFF):
       case EVENTID(BUTTON_POWER, EVENT_CLICK_SHORT, MODE_OFF):
-      case EVENTID(BUTTON_POWER, EVENT_HELD_LONG, MODE_OFF):
     if (mode_volume_){
       mode_volume_ = false;
       beeper.Beep(0.2, 3000);
@@ -148,7 +147,6 @@ public:
   }
   return true;
   //Power Off
-      case EVENTID(BUTTON_POWER, EVENT_HELD_LONG, MODE_ON):
       case EVENTID(BUTTON_POWER, EVENT_LATCH_OFF, MODE_ON):
       case EVENTID(BUTTON_POWER, EVENT_CLICK_SHORT, MODE_ON):
       case EVENTID(BUTTON_AUX, EVENT_LATCH_OFF, MODE_ON):
